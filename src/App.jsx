@@ -8,35 +8,30 @@ const App = () => {
   const [data, setData] = useState(); 
   const [isloading, setIsloading] = useState(false); 
   console.log(data)
-    const handleVerify = async () => {
-      setIsloading(true)
-    try {
-      const response = await axios({
-        method: 'get',
-        url: '/api/server-copy/sv.php', // Always use proxy path
-        params: {
-          key: 'AM-ISTIAK',
-          nid: nid,
-          dob: dob
-        },
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+         const handleVerify = async () => {
+        setIsloading(true);
+        try {
+          const url = `https://proxy.cors.sh/https://apiportal.infinite-service.xyz/?key=jVb22GNsx2xUlvhp&nid=${nid}&dob=${dob}`;
+          const response = await fetch(url, {
+            headers: {
+              'x-cors-api-key': 'temp_024fc39c1e693d7363443fc08ab42a4a'
+            }
+          });
+          const result = await response.json();
+          setData(result);
+          setIsloading(false);
+        } catch (error) {
+          console.error('Error:', error);
+          setIsloading(false);
         }
-      });
-      setData(response.data.data);
-      setIsloading(false)
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+      };
 
   return (
     <>
     <div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100'>
       <div className='w-full max-w-md p-10 space-y-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl'>
         <h1 className='text-2xl font-semibold text-center text-gray-800 mb-8'>
-          NID Verification
+          {/* NID Verification */}
         </h1>
         <div className='space-y-6'>
           <div>

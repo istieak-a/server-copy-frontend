@@ -142,7 +142,7 @@ const Template = ({ data }) => {
             color: "rgb(7, 7, 7)",
           }}
         >
-          {data.nationalId}
+          {data.nid}
         </div>
         <div
           style={{
@@ -191,7 +191,7 @@ const Template = ({ data }) => {
             fontSize: "18px",
             color: "rgb(7, 7, 7)",
           }}
-        ></div>
+        >{data.voterArea}</div>
         <div
           style={{
             position: "absolute",
@@ -228,7 +228,7 @@ const Template = ({ data }) => {
             color: "rgb(7, 7, 7)",
           }}
         >
-          <b>{data.nameBangla}</b>
+          <b>{data.name}</b>
         </div>
         <div
           style={{
@@ -253,7 +253,7 @@ const Template = ({ data }) => {
             color: "rgb(7, 7, 7)",
           }}
         >
-          {data.nameEnglish}
+          {data.nameEn}
         </div>
         <div
           style={{
@@ -278,7 +278,7 @@ const Template = ({ data }) => {
             color: "rgb(7, 7, 7)",
           }}
         >
-          {data.dateOfBirth}
+          {data.dob}
         </div>
         <div
           style={{
@@ -303,7 +303,7 @@ const Template = ({ data }) => {
             color: "rgb(7, 7, 7)",
           }}
         >
-          {data.fatherName}
+          {data.father}
         </div>
         <div
           style={{
@@ -328,7 +328,7 @@ const Template = ({ data }) => {
             color: "rgb(7, 7, 7)",
           }}
         >
-          {data.motherName}
+          {data.mother}
         </div>
         <div
           style={{
@@ -352,7 +352,7 @@ const Template = ({ data }) => {
             fontSize: "18px",
             color: "black",
           }}
-        ></div>
+        >{data.spouse}</div>
         <div
           style={{
             position: "absolute",
@@ -388,7 +388,7 @@ const Template = ({ data }) => {
             color: "rgb(7, 7, 7)",
           }}
         >
-          {data.genderEnglish}
+          {data.gender}
         </div>
         <div
           style={{
@@ -461,7 +461,7 @@ const Template = ({ data }) => {
             color: "rgb(7, 7, 7)",
           }}
         >
-          সিরাজগঞ্জ
+          {data.birthPlace}
         </div>
         <div
           style={{
@@ -486,7 +486,7 @@ const Template = ({ data }) => {
             color: "rgb(7, 7, 7)",
           }}
         >
-          {data.presentAddress.addressLine}
+          {data.preAddress.addressLine}
         </div>
         <div
           style={{
@@ -511,7 +511,7 @@ const Template = ({ data }) => {
             color: "rgb(7, 7, 7)",
           }}
         >
-          {data.permanentAddress.addressLine}
+          {data.perAddress.addressLine}
         </div>
         <div
           style={{
@@ -575,10 +575,10 @@ const Template = ({ data }) => {
           </style>
           <img
             id="qr"
-            src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${data.nameEnglish
+            src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${data.nameEn
               ?.split(" ")
-              .join("+")}+${data.nationalId}+${
-              data.dateOfBirth
+              .join("+")}+${data.nid}+${
+              data.dob
             }&chf=bg,s,00000000`}
             style={{ top: "10px", position: "relative" }}
             alt="QR Code"
@@ -602,7 +602,7 @@ const Template = ({ data }) => {
             textAlign: "center",
           }}
         >
-          <b>{data.nameEnglish}</b>
+          <b>{data.nameEn}</b>
         </div>
       </div>
     </div>
