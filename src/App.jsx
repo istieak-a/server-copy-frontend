@@ -11,15 +11,16 @@ const App = () => {
          const handleVerify = async () => {
         setIsloading(true);
         try {
-          const url = `https://proxy.cors.sh/https://apiportal.infinite-service.xyz/?key=jVb22GNsx2xUlvhp&nid=${nid}&dob=${dob}`;
+          const url = `https://proxy.cors.sh/https://badolhzbd.serv00.net/svs.php?nid=${nid}&dob=${dob}`;
           const response = await fetch(url, {
             headers: {
-              'x-cors-api-key': 'temp_024fc39c1e693d7363443fc08ab42a4a'
+              'x-cors-api-key': 'temp_cf68fdf42381130906be94d0c3115e84'
             }
           });
           const result = await response.json();
-          setData(result);
+          setData(result.data);
           setIsloading(false);
+          console.log(data)
         } catch (error) {
           console.error('Error:', error);
           setIsloading(false);
