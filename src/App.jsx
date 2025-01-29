@@ -20,7 +20,7 @@ const App = () => {
           const result = await response.json();
           setData(result.data);
           setIsloading(false);
-          console.log(data)
+          // console.log(data)
         } catch (error) {
           console.error('Error:', error);
           setIsloading(false);
