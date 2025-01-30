@@ -9,26 +9,64 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const validateNID = (nid) => {
+    return /^\d{10,17}$/.test(nid.trim());
+  };
+
+  const validateDate = (date) => {
+    const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+    return dateRegex.test(date.trim());
+  };
+
   const handleVerify = async (e) => {
     e.preventDefault();
-    setError(""); 
+    setError("");
+    
+    // Validate inputs
+    if (!nid.trim() || !dob.trim()) {
+      setError("Please enter both NID number and Date of Birth");
+      return;
+    }
+
+    if (!validateNID(nid)) {
+      setError("Please enter a valid NID number (10-17 digits)");
+      return;
+    }
+
+    if (!validateDate(dob)) {
+      setError("Please enter a valid date in DD/MM/YYYY format");
+      return;
+    }
+
     setIsLoading(true);
     setData(null);
 
     try {
-      const url = `/api/?key=w3PA1sURO5v2kG3J&nid=${nid}&dob=${dob}`;
+      const formattedDob = dob.split('/').reverse().join('-'); // Convert to YYYY-MM-DD
+      const url = `/api/?key=w3PA1sURO5v2kG3J&nid=${nid.trim()}&dob=${formattedDob}`;
+      
       const response = await axios.get(url, {
         timeout: 15000,
       });
       
-      if (response.data) {
+      if (response.data && Object.keys(response.data).length > 0) {
+        // Validate required data fields
+        const requiredFields = ['name', 'nameEn', 'nid', 'dob', 'father', 'mother'];
+        const missingFields = requiredFields.filter(field => !response.data[field]);
+        
+        if (missingFields.length > 0) {
+          throw new Error("Incomplete data received from server");
+        }
+        
         setData(response.data);
       } else {
-        throw new Error("No data received");
+        throw new Error("No data received from server");
       }
     } catch (error) {
+      console.error("API Error:", error);
       setError(
         error.response?.data?.message || 
+        error.message ||
         "Failed to verify NID. Please check your information and try again."
       );
     } finally {
@@ -56,6 +94,7 @@ const App = () => {
                 value={nid}
                 onChange={(e) => setNid(e.target.value)}
                 disabled={isLoading}
+                maxLength={17}
               />
             </div>
             
@@ -71,10 +110,11 @@ const App = () => {
                 onChange={(e) => setDob(e.target.value)}
                 disabled={isLoading}
               />
+              <p className="text-xs text-gray-500 mt-1">Format: DD/MM/YYYY (Example: 01/12/1990)</p>
             </div>
 
             {error && (
-              <div className="text-red-500 text-sm text-center">
+              <div className="p-3 text-sm text-red-500 bg-red-50 border border-red-100 rounded-lg">
                 {error}
               </div>
             )}
