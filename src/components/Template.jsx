@@ -437,7 +437,7 @@ const Template = ({ data }) => {
             fontSize: "18px",
             color: "red",
           }}
-        ></div>
+        >{data.bloodGroup}</div>
         <div
           style={{
             position: "absolute",

@@ -14,7 +14,7 @@ const App = () => {
   };
 
   const validateDate = (date) => {
-    const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+    const dateRegex = /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\d{4}$/;
     return dateRegex.test(date.trim());
   };
 
@@ -34,7 +34,7 @@ const App = () => {
     }
 
     if (!validateDate(dob)) {
-      setError("Please enter a valid date in DD/MM/YYYY format");
+      setError("Please enter a valid date in DD-MM-YYYY format");
       return;
     }
 
@@ -42,7 +42,7 @@ const App = () => {
     setData(null);
 
     try {
-      const formattedDob = dob.split('/').reverse().join('-'); // Convert to YYYY-MM-DD
+      const formattedDob = dob.split('-').reverse().join('-'); // Convert to YYYY-MM-DD
       const url = `/api/?key=w3PA1sURO5v2kG3J&nid=${nid.trim()}&dob=${formattedDob}`;
       
       const response = await axios.get(url, {
@@ -105,12 +105,12 @@ const App = () => {
               <input
                 className="w-full p-3 bg-gray-50 border-b-2 border-gray-200 focus:border-blue-500 focus:outline-none focus:bg-white transition-all"
                 type="text"
-                placeholder="DD/MM/YYYY"
+                placeholder="DD-MM-YYYY"
                 value={dob}
                 onChange={(e) => setDob(e.target.value)}
                 disabled={isLoading}
               />
-              <p className="text-xs text-gray-500 mt-1">Format: DD/MM/YYYY (Example: 01/12/1990)</p>
+              <p className="text-xs text-gray-500 mt-1">Format: DD-MM-YYYY (Example: 01-12-1990)</p>
             </div>
 
             {error && (
