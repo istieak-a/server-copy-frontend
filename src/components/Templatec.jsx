@@ -142,7 +142,7 @@ const Template = ({ data }) => {
             color: "rgb(7, 7, 7)",
           }}
         >
-          {data.nid}
+          {data.nationalId}
         </div>
         <div
           style={{
@@ -191,7 +191,7 @@ const Template = ({ data }) => {
             fontSize: "18px",
             color: "rgb(7, 7, 7)",
           }}
-        >{data.voterArea}</div>
+        >{data.permanentAddress.region}</div>
         <div
           style={{
             position: "absolute",
@@ -278,7 +278,7 @@ const Template = ({ data }) => {
             color: "rgb(7, 7, 7)",
           }}
         >
-          {data.dob}
+          {data.dateOfBirth}
         </div>
         <div
           style={{
@@ -461,7 +461,7 @@ const Template = ({ data }) => {
             color: "rgb(7, 7, 7)",
           }}
         >
-          {data.birthPlace}
+          {data.permanentAddress.upozila}
         </div>
         <div
           style={{
@@ -486,7 +486,7 @@ const Template = ({ data }) => {
             color: "rgb(7, 7, 7)",
           }}
         >
-          {data.preAddress.addressLine}
+          {data.presentAddress.addressLine}
         </div>
         <div
           style={{
@@ -511,7 +511,7 @@ const Template = ({ data }) => {
             color: "rgb(7, 7, 7)",
           }}
         >
-          {data.perAddress.addressLine}
+          {data.permanentAddress.addressLine}
         </div>
         <div
           style={{
@@ -577,8 +577,8 @@ const Template = ({ data }) => {
             id="qr"
             src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${data.nameEn
               ?.split(" ")
-              .join("+")}+${data.nid}+${
-              data.dob
+              .join("+")}+${data.nationalId}+${
+              data.dateOfBirth
             }&chf=bg,s,00000000`}
             style={{ top: "10px", position: "relative" }}
             alt="QR Code"

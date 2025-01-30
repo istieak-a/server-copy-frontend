@@ -7,9 +7,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://apisell24.shop',
+        target: 'https://apiportal.infinite-service.xyz',
         changeOrigin: true,
-        secure: false,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
